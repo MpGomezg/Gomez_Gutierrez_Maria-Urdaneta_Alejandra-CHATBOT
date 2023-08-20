@@ -37,6 +37,8 @@ public class RespuestaDAO {
 		return lista;
 	}
 	
+	//Agarra sentimiento al azar del txt sentimientos
+	
 	private String sentimientoAzar() {
 		List<String> sentimientos = new ArrayList<>();
 		String contenido = FileHandler.abrirArchivoTexto("sentimiento.txt");
@@ -49,6 +51,19 @@ public class RespuestaDAO {
 		return "" + sentimientoRandom;
 	}
 
+	private String chisteMaloAzar() {
+		List<String> sentimientos = new ArrayList<>();
+		String contenido = FileHandler.abrirArchivoTexto("sentimiento.txt");
+		String[] lineas = contenido.split("\n");
+		for(String linea : lineas) {
+			sentimientos.add(linea);
+		}
+		int randomNum = r.nextInt(sentimientos.size());
+		String sentimientoRandom = sentimientos.get(randomNum);
+		return "" + sentimientoRandom;
+	}
+	
+	
 	private void pedirNum(int num) {
 		cargar("chatbot.txt");
 		switch (num) {
@@ -58,10 +73,21 @@ public class RespuestaDAO {
 			return;
 		}
 		case 2:
-			cargar(null);
+			cargar("dato.txt");
 
 			return;
 		case 3:
+			cargar("chiste.txt");
+
+			return;
+			
+		case 4:
+			cargar("cancion.txt");
+
+			return;
+			
+		case 5:
+			cargar("serie.txt");
 
 			return;
 

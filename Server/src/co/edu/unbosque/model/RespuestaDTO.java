@@ -8,24 +8,24 @@ public class RespuestaDTO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -893295406840233846L;
-	private int num;
+	private String num;
 	private String resp;
 	
 	public RespuestaDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RespuestaDTO(int num, String resp) {
+	public RespuestaDTO(String num, String resp) {
 		super();
 		this.num = num;
 		this.resp = resp;
 	}
 
-	public int getNum() {
+	public String getNum() {
 		return num;
 	}
 
-	public void setNum(int num) {
+	public void setNum(String num) {
 		this.num = num;
 	}
 
