@@ -1,0 +1,5 @@
+1: ¿Como estas?
+2: Cuentame un dato.
+3: Cuentame un chiste.
+4: Recomiendame una canción
+5: Recomiendame una serie
