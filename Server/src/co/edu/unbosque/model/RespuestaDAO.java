@@ -23,23 +23,16 @@ public class RespuestaDAO {
 
 	// QUIERO CARGAR EL ARCHIVO DE TEXTO, PERO LA DIRECCION DEL ARCHIVO CAMBIA
 	// DEPENDIENDO
-	private ArrayList<RespuestaDTO> cargar(String dir) {
+	public String cargar(String dir) {
 		String contenido = FileHandler.abrirArchivoTexto(dir);
-		String[] lineas = contenido.split("\n");
-		for (String linea : lineas) {
-			String[] attrs = linea.split(".");
-			if (attrs.length == 2) {
-				String num = attrs[0];
-				String res = attrs[1];
-				lista.add(new RespuestaDTO(num, res));
-			}
+		return contenido;
 		}
-		return lista;
-	}
+		
+	
 	
 	//Agarra sentimiento al azar del txt sentimientos
 	
-	private String sentimientoAzar() {
+	public String sentimientoAzar() {
 		List<String> sentimientos = new ArrayList<>();
 		String contenido = FileHandler.abrirArchivoTexto("sentimiento.txt");
 		String[] lineas = contenido.split("\n");
