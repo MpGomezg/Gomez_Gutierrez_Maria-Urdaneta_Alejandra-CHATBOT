@@ -6,7 +6,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
+import co.edu.unbosque.model.RespuestaDAO;
 import co.edu.unbosque.model.RespuestaDTO;
 
 public class Server extends Thread {
@@ -17,6 +19,7 @@ public class Server extends Thread {
 	private ObjectOutputStream out;
 	private int port;
 	private String direccCliente;
+	private RespuestaDAO rdao;
 
 	public Server(int port) {
 		super();
@@ -27,31 +30,57 @@ public class Server extends Thread {
 		this.out = null;
 		this.port = port;
 		this.direccCliente = direccCliente;
+		rdao = new RespuestaDAO();
 	}
 
 	RespuestaDTO res;
 
 	public void run() {
+
 		try {
 			this.server = new ServerSocket(this.port);
 			System.out.println("Server started");
 			System.out.println("Waiting for a client ...");
 			this.socket = server.accept();
 			System.out.println("Client accepted");
+
+			// q se mande el archivo txt
+
+			this.out = new ObjectOutputStream(socket.getOutputStream());
+			String menu = (String) rdao.cargar("menu.txt");
+			this.out.writeObject(menu);
+			this.out.flush();
+
 			this.in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
-			res = (RespuestaDTO) in.readObject();
-			
+			String num = in.readUTF();
+			// this.socketR = new Socket(this.socket.getInetAddress(), this.port + 1);
+//			this.out = new ObjectOutputStream(socketR.getOutputStream());
+
+			switch (num) {
+			case "1": {
+				System.out.println("El numero fue.." + num);
+				String resp = rdao.sentimientoAzar();
+				this.out.writeUTF(resp);
+				this.out.flush();
+				return;
+			}
+
+			}
 
 		} catch (IOException i) {
 			System.out.println(i);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
-	
 	public void usuarioOpcion(int num) {
-		
+		try {
+			if (socketR.isClosed()) {
+				System.out.println("Connection is closed.");
+				return;
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }
