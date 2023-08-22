@@ -33,6 +33,19 @@ public class Client extends Thread {
 
 	@Override
 	public void run() {
+
+		try {
+			this.socket = new Socket(this.address, this.port);
+			this.in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+
+			String menu = (String) in.readObject();
+			System.out.println("" + menu);
+
+			System.out.print("Enter a number (1 for info from option 1): ");
+			String userChoice = sc.nextLine();
+			this.out = new ObjectOutputStream(socket.getOutputStream());
+			// Send user's choice to the server
+=======
 //while (true) {
 		try {
 			this.socket = new Socket(this.address, this.port);
@@ -49,6 +62,7 @@ public class Client extends Thread {
 			for(int i=0; i<5;i++) {
 			System.out.println("" + menu);
 			String userChoice = sc.nextLine();
+
 			this.out.writeUTF(userChoice);
 			this.out.flush();
 			switch (userChoice) {
@@ -56,15 +70,20 @@ public class Client extends Thread {
 				
 				String response = in.readUTF();
 				System.out.println("Server response: " + response);
-				//this.socket.close();
-				//this.out.close();
-				//this.in.close();
-				//run();
+
 				
 				
 				break;
 				
 			default:
+
+				throw new IllegalArgumentException("Unexpected value: " + userChoice);
+			}
+			
+			
+
+			this.socket.close();
+=======
 				//throw new IllegalArgumentException("Unexpected value: " + userChoice);
 				//this.socket.close();
 				//this.out.close();
@@ -83,7 +102,9 @@ public class Client extends Thread {
 
 			// Receive and process server's response
 
-			
+
+			this.out.close();
+			this.in.close();
 			
 
 		} catch (IOException | ClassNotFoundException e) {
@@ -93,6 +114,6 @@ public class Client extends Thread {
 
 		// sends output to the socket
 
-	//}
+
 	}
 }
