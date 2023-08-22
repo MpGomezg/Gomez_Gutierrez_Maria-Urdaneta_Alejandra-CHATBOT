@@ -36,6 +36,7 @@ public class Server extends Thread {
 	RespuestaDTO res;
 
 	public void run() {
+
 		try {
 			this.server = new ServerSocket(this.port);
 			System.out.println("Server started");
@@ -44,11 +45,12 @@ public class Server extends Thread {
 			System.out.println("Client accepted");
 
 			// q se mande el archivo txt
-//while(true) {
+
 			this.out = new ObjectOutputStream(socket.getOutputStream());
 			String menu = (String) rdao.cargar("menu.txt");
 			this.out.writeObject(menu);
 			this.out.flush();
+
 //-->>
 			this.in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 			
@@ -88,7 +90,6 @@ public class Server extends Thread {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-	
+    }
 	}
 }

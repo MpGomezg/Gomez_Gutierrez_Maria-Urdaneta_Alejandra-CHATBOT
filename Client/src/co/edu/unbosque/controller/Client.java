@@ -33,6 +33,9 @@ public class Client extends Thread {
 
 	@Override
 	public void run() {
+
+
+
 //while (true) {
 		try {
 			this.socket = new Socket(this.address, this.port);
@@ -49,6 +52,7 @@ public class Client extends Thread {
 			for(int i=0; i<5;i++) {
 			System.out.println("" + menu);
 			String userChoice = sc.nextLine();
+
 			this.out.writeUTF(userChoice);
 			this.out.flush();
 			switch (userChoice) {
@@ -56,15 +60,19 @@ public class Client extends Thread {
 				
 				String response = in.readUTF();
 				System.out.println("Server response: " + response);
-				//this.socket.close();
-				//this.out.close();
-				//this.in.close();
-				//run();
-				
+
 				
 				break;
 				
 			default:
+
+				throw new IllegalArgumentException("Unexpected value: " + userChoice);
+			}
+			
+			
+
+			this.socket.close();
+
 				//throw new IllegalArgumentException("Unexpected value: " + userChoice);
 				//this.socket.close();
 				//this.out.close();
@@ -83,8 +91,6 @@ public class Client extends Thread {
 
 			// Receive and process server's response
 
-			
-			
 
 		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -93,6 +99,5 @@ public class Client extends Thread {
 
 		// sends output to the socket
 
-	//}
 	}
 }
