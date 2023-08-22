@@ -45,6 +45,24 @@ public class Client extends Thread {
 			String userChoice = sc.nextLine();
 			this.out = new ObjectOutputStream(socket.getOutputStream());
 			// Send user's choice to the server
+=======
+//while (true) {
+		try {
+			this.socket = new Socket(this.address, this.port);
+			this.in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+			//-->>
+			String menu = (String) in.readObject();
+//			while(true) {
+
+			System.out.println("" + menu);
+
+			System.out.print("Enter a number (1 for info from option 1): ");
+			this.out = new ObjectOutputStream(socket.getOutputStream());
+			// Send user's choice to the server
+			for(int i=0; i<5;i++) {
+			System.out.println("" + menu);
+			String userChoice = sc.nextLine();
+
 			this.out.writeUTF(userChoice);
 			this.out.flush();
 			switch (userChoice) {
@@ -52,22 +70,38 @@ public class Client extends Thread {
 				
 				String response = in.readUTF();
 				System.out.println("Server response: " + response);
-		
+
 				
 				
 				break;
 				
 			default:
+
 				throw new IllegalArgumentException("Unexpected value: " + userChoice);
 			}
 			
 			
 
 			this.socket.close();
+=======
+				//throw new IllegalArgumentException("Unexpected value: " + userChoice);
+				//this.socket.close();
+				//this.out.close();
+				//this.in.close();
+
+			}
+
+				
+			}
+			this.socket.close();
+			this.out.close();
+			this.in.close();
+
 //            this.server = new ServerSocket(this.port+1);
 //	        this.socket = server.accept(); 
 
 			// Receive and process server's response
+
 
 			this.out.close();
 			this.in.close();
@@ -79,6 +113,7 @@ public class Client extends Thread {
 		}
 
 		// sends output to the socket
+
 
 	}
 }

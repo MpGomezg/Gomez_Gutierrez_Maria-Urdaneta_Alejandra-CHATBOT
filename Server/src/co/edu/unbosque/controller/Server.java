@@ -72,6 +72,36 @@ public class Server extends Thread {
 		}
 	}
 
+//-->>
+			this.in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+			
+			
+			for(int i=0; i<5;i++) {
+			String num = in.readUTF();
+			// this.socketR = new Socket(this.socket.getInetAddress(), this.port + 1);
+//			this.out = new ObjectOutputStream(socketR.getOutputStream());
+			System.out.println("El numero fue.." + num);
+			switch (num) {
+			case "1": {
+				String resp = rdao.sentimientoAzar();
+				this.out.writeUTF(resp);
+				this.out.flush();
+				//this.socket.close();
+				//this.out.close();
+				//this.in.close();
+//				return;
+			}
+			}
+			}
+			this.socket.close();
+			this.out.close();
+			this.in.close();
+			return;
+		} catch (IOException i) {
+			System.out.println(i);
+		}	}
+	
+
 	public void usuarioOpcion(int num) {
 		try {
 			if (socketR.isClosed()) {
@@ -82,5 +112,6 @@ public class Server extends Thread {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
 	}
 }

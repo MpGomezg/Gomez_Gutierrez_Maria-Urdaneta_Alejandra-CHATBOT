@@ -1,0 +1,4 @@
+1: Dato de animales
+2: Dato historico
+3: Dato de cultura pop
+4: Dato de videojuego

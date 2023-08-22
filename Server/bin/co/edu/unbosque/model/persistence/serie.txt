@@ -1,0 +1,5 @@
+1. Serie policiaca
+2. Serie de horror
+3. Serie de misterio
+4. Serie romantica
+5. Serie de acción
