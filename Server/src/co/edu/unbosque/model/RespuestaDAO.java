@@ -21,32 +21,14 @@ public class RespuestaDAO {
 		this.lista = lista;
 	}
 
-	// QUIERO CARGAR EL ARCHIVO DE TEXTO, PERO LA DIRECCION DEL ARCHIVO CAMBIA
-	// DEPENDIENDO
-	public String cargar(String dir) {
+
+	public String cargar1(String dir) {
 		String contenido = FileHandler.abrirArchivoTexto(dir);
 		return contenido;
 		}
-		
-	
-	
-	//Agarra sentimiento al azar del txt sentimientos
-	
-	public String sentimientoAzar() {
+	public String cargar2(String dir) {
 		List<String> sentimientos = new ArrayList<>();
-		String contenido = FileHandler.abrirArchivoTexto("sentimiento.txt");
-		String[] lineas = contenido.split("\n");
-		for(String linea : lineas) {
-			sentimientos.add(linea);
-		}
-		int randomNum = r.nextInt(sentimientos.size());
-		String sentimientoRandom = sentimientos.get(randomNum);
-		return "" + sentimientoRandom;
-	}
-
-	private String chisteMaloAzar() {
-		List<String> sentimientos = new ArrayList<>();
-		String contenido = FileHandler.abrirArchivoTexto("sentimiento.txt");
+		String contenido = FileHandler.abrirArchivoTexto(dir);
 		String[] lineas = contenido.split("\n");
 		for(String linea : lineas) {
 			sentimientos.add(linea);
@@ -57,36 +39,5 @@ public class RespuestaDAO {
 	}
 	
 	
-	private void pedirNum(int num) {
-		cargar("chatbot.txt");
-		switch (num) {
-		case 1: {
-			sentimientoAzar();
-
-			return;
-		}
-		case 2:
-			cargar("dato.txt");
-
-			return;
-		case 3:
-			cargar("chiste.txt");
-
-			return;
-			
-		case 4:
-			cargar("cancion.txt");
-
-			return;
-			
-		case 5:
-			cargar("serie.txt");
-
-			return;
-
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + num);
-		}
-
-	}
+	
 }
