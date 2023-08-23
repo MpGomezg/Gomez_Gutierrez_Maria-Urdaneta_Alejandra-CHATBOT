@@ -45,7 +45,4 @@ public class RespuestaDTO implements Serializable{
 	public String toString() {
 		return "RespuestaDTO [num=" + num + ", resp=" + resp + "]";
 	}
-	
-	
-	
 }

@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class FileHandler {
 	private static Scanner lector;
 	private static File archivo;
-	private static PrintWriter escritor; // clase para escribir en el archivo
+	private static PrintWriter escritor; 
 
 	public FileHandler() {
 
