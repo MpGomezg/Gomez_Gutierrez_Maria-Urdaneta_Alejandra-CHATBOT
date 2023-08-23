@@ -34,13 +34,11 @@ public class Client extends Thread {
 	@Override
 	public void run() {
 
-
-
 //while (true) {
 		try {
 			this.socket = new Socket(this.address, this.port);
 			this.in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
-			//-->>
+			// -->>
 			String menu = (String) in.readObject();
 //			while(true) {
 
@@ -49,39 +47,31 @@ public class Client extends Thread {
 			System.out.print("Enter a number (1 for info from option 1): ");
 			this.out = new ObjectOutputStream(socket.getOutputStream());
 			// Send user's choice to the server
-			for(int i=0; i<5;i++) {
-			System.out.println("" + menu);
-			String userChoice = sc.nextLine();
-
-			this.out.writeUTF(userChoice);
-			this.out.flush();
-			switch (userChoice) {
-			case "1": 
-				
+			for (int i = 0; i < 20; i++) {
+				String userChoice = sc.nextLine();
+				this.out.writeUTF(userChoice);
+				this.out.flush();
 				String response = in.readUTF();
+				String respuestas = "12345";
 				System.out.println("Server response: " + response);
+				if (respuestas.contains(userChoice) && !userChoice.equals("1")) {
+					String userChoice2 = sc.nextLine();
+					this.out.writeUTF(userChoice + "." + userChoice2);
+					this.out.flush();
+					String response2 = in.readUTF();
+					System.out.println("Server response: " + response2);
 
-				
-				break;
-				
-			default:
+				}
 
-				throw new IllegalArgumentException("Unexpected value: " + userChoice);
-			}
-			
-			
+				this.socket.close();
 
-			this.socket.close();
-
-				//throw new IllegalArgumentException("Unexpected value: " + userChoice);
-				//this.socket.close();
-				//this.out.close();
-				//this.in.close();
+				// throw new IllegalArgumentException("Unexpected value: " + userChoice);
+				// this.socket.close();
+				// this.out.close();
+				// this.in.close();
 
 			}
 
-				
-			}
 			this.socket.close();
 			this.out.close();
 			this.in.close();
@@ -90,7 +80,6 @@ public class Client extends Thread {
 //	        this.socket = server.accept(); 
 
 			// Receive and process server's response
-
 
 		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
